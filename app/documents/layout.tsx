@@ -10,7 +10,7 @@ const DashboardLayout = ({children}:{
 }) => {
     const  {isAuthenticated,isLoading} = useConvexAuth()
 
-  if (!isAuthenticated) redirect('/sign-in' || '/')
+  if (!isAuthenticated && !isLoading) redirect('/')
     
 
 if(isLoading){

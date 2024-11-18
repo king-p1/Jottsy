@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import {Toaster} from 'sonner'
 import { ThemeProvider } from "@/components/themes/theme-provider";
 import { ConvexClientProvider } from "@/providers/convex-provider";
 
@@ -32,6 +32,7 @@ export default function RootLayout({
                       disableTransitionOnChange
                       >
         {children}
+<Toaster position="top-right" />
         </ThemeProvider>
                   </ConvexClientProvider>
          </body>
