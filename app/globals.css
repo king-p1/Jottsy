@@ -76,3 +76,51 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+.auth-page {
+  @apply flex h-screen w-full flex-col items-center justify-center gap-10 bg-neutral-900;
+}
+
+
+.cl-internal-1l66zxt{
+  display: none;
+}
+
+.cl-internal-w4f4gh > :not(:first-of-type) {
+  display: none;
+}
+
+.cl-internal-1l66zxt,.cl-internal-1hp5nqm,.cl-internal-1rnh0sl,.cl-internal-13hl4in  {
+  display: none;
+}
+
+.cl-internal-w4f4gh > :not(:first-of-type) {
+  display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar,
+.custom-scrollbar-2::-webkit-scrollbar {
+  width: 8px;
+  margin-left: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track,
+.custom-scrollbar-2::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb,
+.custom-scrollbar-2::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #f50e0e;
+}
+
+.custom-scrollbar-2::-webkit-scrollbar-thumb:hover {
+  background: #797878;
+}

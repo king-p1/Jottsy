@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+
 import { ThemeProvider } from "@/components/themes/theme-provider";
+import { ConvexClientProvider } from "@/providers/convex-provider";
 
  
 export const metadata: Metadata = {
-  title: "Jotssy",
+  title: "Jottsy",
   description: "Notion clone created with nextjs",
 };
 
@@ -17,26 +17,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+         <head>
+  <link rel="icon" href="/jottsy.png" type="image/svg+xml" />
+        </head>
       <body
         className={`font-mono antialiased`}
       >
-  <ClerkProvider
-      appearance={{
-        baseTheme:dark,
-        variables:{colorPrimary:'#3371FF',
-          fontSize:'16px'
-        }
-      }}
-      >
+      <ConvexClientProvider>
+
               <ThemeProvider
                       attribute="class"
                       defaultTheme="dark"
                       enableSystem
                       disableTransitionOnChange
-                    >
+                      >
         {children}
         </ThemeProvider>
-        </ClerkProvider>      </body>
+                  </ConvexClientProvider>
+         </body>
     </html>
   );
 }
