@@ -16,6 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { ArchivedBox } from './archived-box'
 
 export const DocNavigations = () => {
   
@@ -169,8 +170,7 @@ Icon={Archive}
   <PopoverContent 
   className='p-0 w-72'
   side={isMobile ? 'bottom' : 'right'}>
-    Place content for the popover here.
-    </PopoverContent>
+<ArchivedBox/>    </PopoverContent>
 </Popover>
 
 </div>

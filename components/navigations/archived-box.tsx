@@ -1,0 +1,93 @@
+"use client"
+import { api } from '@/convex/_generated/api'
+import { Id } from '@/convex/_generated/dataModel'
+import { useQuery,useMutation } from 'convex/react'
+import { Search } from 'lucide-react'
+import { useParams,useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { TbLoader3 } from 'react-icons/tb'
+import { toast } from 'sonner'
+import { Input } from '../ui/input'
+
+export const ArchivedBox = () => {
+  const router = useRouter()
+  const params = useParams()
+  const documents = useQuery(api.documents.getArchivedDocs)
+  const restore = useMutation(api.documents.restoreDoc)
+  const deleteDocument  = useMutation(api.documents.deleteDoc)
+
+const [search, setSearch] = useState('')
+
+const filteredDocument = documents?.filter(({title})=>{
+  return title.toLowerCase().includes(search.toLowerCase())
+})
+
+const onClick = (documentId:string) => {
+  router.push(`/documents/${documentId}`)
+}
+
+const handleRestore = (e:React.MouseEvent<HTMLDivElement,MouseEvent>,documentId:Id<"documents">) =>{
+  e.stopPropagation()
+const promise = restore({
+  id:documentId
+}) 
+toast.promise(promise,{
+  loading:'Restoring archived document...',
+  success:'Archived document restored!',
+  error:'Failed to restore document.'
+})
+}
+
+const handleDelete = (documentId:Id<"documents">) =>{
+const promise = deleteDocument({
+  id:documentId
+}) 
+toast.promise(promise,{
+  loading:'Deleting document...',
+  success:'Document has been deleted!',
+  error:'Failed to delete document.'
+})
+
+if(params.documentId === documentId) {
+  router.push('/documents')
+}
+}
+
+
+if(documents === undefined){
+  return(
+    <div className='h-64 w-full flex justify-center items-center'>
+    <TbLoader3 className='animate-spin' size={45}/>
+</div>
+  )
+}
+
+  return (
+    <div className='text-sm'>
+      
+      <div className="flex items-center gap-x-1 p-2">
+        <Search className='h-4 w-4 mr-1'/>
+        <Input
+        value={search}
+        placeholder='Filter by title...'
+        className='h-7 px-2 focus-visible:ring-transparent bg-secondary'
+        />
+      </div>
+      <div className="mt-2 px-1 pb-1">
+        <p className='text-sm pb-2 hidden text-center text-muted-foreground last:block'>
+          No documents found
+        </p>
+        {filteredDocument?.map(({_id:id,title})=>(
+          <div
+          role='button'
+          onClick={()=>onClick(id)}
+          className='text-base rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between'
+          >
+<span>{title}</span>
+          </div>
+        ))}
+      </div>
+      </div>
+
+  )
+}
