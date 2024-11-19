@@ -1,6 +1,7 @@
 import {LucideIcon} from 'lucide-react'
 import { Doc, Id } from './convex/_generated/dataModel'
 import { IconType } from "react-icons/lib"
+import { ReactNode } from 'react'
 
 
 export interface ItemProps {
@@ -25,6 +26,12 @@ export interface DocumentListProps{
 export interface DocNavProps{
     isCollapsed:boolean
     onResetWidth:()=>void
+
+}
+export interface IconPickerProps{
+    asChild?:boolean
+    onChange:(icon:string)=>void
+    children:ReactNode
 
 }
 

@@ -4,11 +4,13 @@ import { useMutation } from "convex/react";
 import React, { useState,useRef } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { Menu } from "./menu";
 
 export const Title = ({ initialData }: TitleProps) => {
   const { icon, title,_id:id } = initialData;
 
-  const inputRef = useRef<HTMLInputElement>()
+  const inputRef = useRef<HTMLInputElement>(null)
   const update = useMutation(api.documents.updateDoc);
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -34,15 +36,26 @@ update({
 })
 }
 
+const onKeyDown=(e:React.KeyboardEvent<HTMLInputElement>)=>{
+    if(e.key === 'Enter') disableInput()
+}
+
   return (
     <div className="flex items-center gap-x-1">
       {!!icon && <p>{icon}</p>}
       {isEditing ? (
-        <Input className="h-7 px-2 focus-visible:ring-transparent" />
+        <Input 
+        ref={inputRef}
+        onBlur={disableInput}
+        value={inputTitle}
+        onClick={enableInputChange}
+        onKeyDown={onKeyDown}
+        onChange={onChange}
+        className="h-7 px-2 focus-visible:ring-transparent" />
       ) : (
         <Button
           variant="ghost"
-          onClick={() => {}}
+          onClick={enableInputChange}
           className="h-auto p-1 font-medium"
         >
           <span className="truncate">{title}</span>
@@ -51,3 +64,14 @@ update({
     </div>
   );
 };
+
+Title.Skeleton = function TitleSkeleton ({level}:{level?:number}) {
+    return (
+        <div className="w-full">
+        <div className="flex justify-center items-center gap-2">
+            <Skeleton className="h-6 w-40 rounded-md "/>
+            <Menu.Skeleton/>
+        </div>
+        </div>
+    )
+    }
