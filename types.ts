@@ -47,6 +47,14 @@ export type SearchStoreType = {
     toggle:()=>void
 }
 
+export type CoverImageType = {
+    isOpen:boolean
+    onOpen:()=>void
+    onClose:()=>void
+    url?:string
+    onReplace : (url:string) => void
+}
+
 export type SettingsStoreType = {
     isOpen:boolean
     onOpen:()=>void

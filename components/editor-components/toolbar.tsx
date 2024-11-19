@@ -2,10 +2,11 @@ import { Doc } from "@/convex/_generated/dataModel";
 import React, { ElementRef, useRef, useState } from "react";
 import { IconPicker } from "./icon-picker";
 import { Button } from "../ui/button";
-import { Image, Smile, X } from "lucide-react";
+import { Image as ImageIcon, Smile, X } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import TextareaAutosize from 'react-textarea-autosize';
+import { useCoverImage } from "@/hooks/use-cover-image";
 
 export const Toolbar = ({
   initialData,
@@ -14,7 +15,7 @@ export const Toolbar = ({
   initialData: Doc<"documents">;
   preview?: boolean;
 }) => {
-  const { icon,coverImage,content,title,_id:id } = initialData;
+  const { icon,coverImage,title,_id:id } = initialData;
 
 const inputRef = useRef<ElementRef<"textarea">>(null)
 const [isEditing, setIsEditing] = useState<boolean>(true);
@@ -22,6 +23,8 @@ const [value, setValue] = useState(title);
 
 const update = useMutation(api.documents.updateDoc)
 const deleteIcon = useMutation(api.documents.deleteIcon)
+
+const coverImageHook = useCoverImage()
 
 const enableInputChange = () =>{
     if(preview) return 
@@ -101,9 +104,9 @@ id:id
     className="text-muted-foreground"
     variant='outline'
     size='sm'
-    onClick={()=>{}}
+    onClick={coverImageHook.onOpen}
     >
-        <Image className="h-4 w-4"/>
+        <ImageIcon className="h-4 w-4"/>
     Add Cover Image
     </Button>
 )}

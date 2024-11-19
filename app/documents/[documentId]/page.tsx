@@ -1,4 +1,5 @@
 "use client"
+import { CoverImage } from '@/components/editor-components/cover-image'
 import { Toolbar } from '@/components/editor-components/toolbar'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
@@ -22,7 +23,8 @@ if(document === null) return <>Not found..</>
 
   return (
     <section className='pb-40'>
-      <div className='h-[35vh]'/>
+     <CoverImage url={document.coverImage}/>
+     
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
         <Toolbar initialData={document}/>
       </div>

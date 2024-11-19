@@ -229,7 +229,7 @@ export const deleteDoc = mutation({
         if (!existingsDocs) throw new Error("Document not found!");
         if(existingsDocs.userId !== userId)throw new Error("Not authorized!");
 
-        const document = ctx.db.delete(args.id)
+        const document =await ctx.db.delete(args.id)
         
         return document
         
@@ -251,8 +251,31 @@ export const deleteIcon = mutation({
         if (!existingsDocs) throw new Error("Document not found!");
         if(existingsDocs.userId !== userId)throw new Error("Not authorized!");
 
-        const document = ctx.db.patch(args.id,{
+        const document = await ctx.db.patch(args.id,{
           icon:undefined
+        })
+        
+        return document
+        
+     },
+})
+export const deleteCoverImg = mutation({
+    args: {
+        id: v.id("documents")
+     },
+     handler:async(ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity) throw new Error("Not authenticated!");
+        
+        const userId = identity.subject;
+        
+        const existingsDocs = await ctx.db.get(args.id)
+        if (!existingsDocs) throw new Error("Document not found!");
+        if(existingsDocs.userId !== userId)throw new Error("Not authorized!");
+
+        const document = await ctx.db.patch(args.id,{
+          coverImage:undefined
         })
         
         return document

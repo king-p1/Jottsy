@@ -21,7 +21,7 @@ const  {isAuthenticated,isLoading} = useConvexAuth()
       (<SignInButton mode='modal'>
         <Button variant='default' size='sm' className='flex gap-2 items-center'>
           <MdOutlineLogin size={27}/>
-          Get Jotssy</Button>
+          Get Jottsy</Button>
       </SignInButton>)}
       
     {isAuthenticated && !isLoading &&( 
@@ -35,7 +35,7 @@ const  {isAuthenticated,isLoading} = useConvexAuth()
       <Button variant='default' size='sm' asChild >
         <Link className='flex gap-2 items-center' href={'/documents'}>
           <FaRegFolderOpen size={27}/>
-          Enter Jotssy
+          Enter Jottsy
         </Link>
           </Button>
     </div>  

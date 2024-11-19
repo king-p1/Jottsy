@@ -4,8 +4,9 @@ import {Toaster} from 'sonner'
 import { ThemeProvider } from "@/components/themes/theme-provider";
 import { ConvexClientProvider } from "@/providers/convex-provider";
 import { ModalProvider } from "@/providers/modal-provider";
-
+import { EdgeStoreProvider } from '../lib/edgestore';
  
+
 export const metadata: Metadata = {
   title: "Jottsy",
   description: "Notion clone created with nextjs",
@@ -25,6 +26,7 @@ export default function RootLayout({
         className={`font-mono antialiased`}
       >
       <ConvexClientProvider>
+      <EdgeStoreProvider>
 
               <ThemeProvider
                       attribute="class"
@@ -37,6 +39,7 @@ export default function RootLayout({
         <ModalProvider/>
 <Toaster position="top-right" />
         </ThemeProvider>
+                        </EdgeStoreProvider>
                   </ConvexClientProvider>
          </body>
     </html>
