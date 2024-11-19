@@ -49,6 +49,29 @@ export const getSidebarDocs = query({
   },
 });
 
+export const getById = query({
+  args: {
+    documentId:v.id("documents")
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    const documents = await ctx.db.get(args.documentId)
+
+    if(!documents) throw new Error('Document not found')
+
+      if(documents.isPublished && !documents.isArchived) return documents;
+
+      if (!identity) throw new Error("Not authenticated!");
+        
+        const userId = identity.subject;
+
+        if(documents.userId !== userId) throw new Error("Not authorized!");
+ 
+        return documents
+    },
+});
+
 
 export const archiveDocs = mutation({
     args: {
@@ -108,6 +131,28 @@ export const getArchivedDocs = query({
           q.eq("userId", userId)
         )
         .filter((q) => q.eq(q.field("isArchived"), true))
+        .order("desc")
+        .collect();
+  
+      return documents;
+    },
+  });
+
+export const getSearchedDocs = query({
+   
+    handler: async (ctx) => {
+      const identity = await ctx.auth.getUserIdentity();
+  
+      if (!identity) throw new Error("Not authenticated!");
+  
+      const userId = identity.subject;
+  
+      const documents = await ctx.db
+        .query("documents")
+        .withIndex("by_user", (q) =>
+          q.eq("userId", userId)
+        )
+        .filter((q) => q.eq(q.field("isArchived"), false))
         .order("desc")
         .collect();
   
@@ -190,3 +235,35 @@ export const deleteDoc = mutation({
         
      },
 })
+
+
+export const updateDoc = mutation({
+  args: {
+    id: v.id("documents"),
+    title: v.optional(v.string()),
+    coverImage: v.optional(v.string()),
+    content: v.optional(v.string()),
+    icon: v.optional(v.string()),
+    isPublished: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) throw new Error("Not authenticated!");
+
+    const userId = identity.subject;
+
+    const {id,...rest} = args
+
+    const existingsDocs = await ctx.db.get(args.id)
+    if (!existingsDocs) throw new Error("Document not found!");
+
+    if(existingsDocs.userId !== userId)throw new Error("Not authorized!");
+
+    const document = await ctx.db.patch(id, {
+     ...rest
+    });
+    return document;
+  },
+});
+

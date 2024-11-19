@@ -3,6 +3,7 @@ import "./globals.css";
 import {Toaster} from 'sonner'
 import { ThemeProvider } from "@/components/themes/theme-provider";
 import { ConvexClientProvider } from "@/providers/convex-provider";
+import { ModalProvider } from "@/providers/modal-provider";
 
  
 export const metadata: Metadata = {
@@ -31,7 +32,9 @@ export default function RootLayout({
                       enableSystem
                       disableTransitionOnChange
                       >
+                        
         {children}
+        <ModalProvider/>
 <Toaster position="top-right" />
         </ThemeProvider>
                   </ConvexClientProvider>

@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils"
 import { ItemProps } from "@/types"
 import { ChevronDown, ChevronRight, Plus, Ellipsis } from "lucide-react"
 import { MdKeyboardCommandKey } from "react-icons/md";
-import { ImWindows } from "react-icons/im";
 import { Skeleton } from "../ui/skeleton";
 import React from "react";
 import { useMutation } from 'convex/react'
@@ -99,7 +98,7 @@ router.push(`/documents/${documentId}`)
 
         {isSearch && (<kbd className=" ml-auto pointer-events-none rounded border bg-muted h-7 select-none inline-flex px-1 gap-1 items-center text-muted-foreground font-medium text-[16px]">
             <span className="text-sm flex items-center justify-center ">
-                <ImWindows size={17}/>
+                Ctrl
                 / 
                 <MdKeyboardCommandKey size={17}/>
                 </span>K

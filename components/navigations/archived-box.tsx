@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { TbLoader3 } from 'react-icons/tb'
 import { toast } from 'sonner'
 import { Input } from '../ui/input'
+import { ConfirmModal } from '../modal/confirm-modal'
 
 export const ArchivedBox = () => {
   const router = useRouter()
@@ -90,20 +91,23 @@ if(documents === undefined){
 <div
 onClick={(e)=>handleRestore(e,id)}
 role='button'
-className='rounded-sm p-2 hover:bg-neutral-200'
+className='rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600'
 >
   <Undo className='h-4 w-4 mr-1 text-muted-foreground'/>
 
 </div>
 
-<div
-onClick={(e)=>handleDelete(id)}
-role='button'
-className='rounded-sm p-2 hover:bg-neutral-200'
+<ConfirmModal
+onConfirm={()=>handleDelete(id)}
 >
-  <Trash className='h-4 w-4 mr-1 text-muted-foreground'/>
+<div
+role='button'
+className='rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600 flex items-center justify-center'
+>
+  <Trash className='h-4 w-4  text-muted-foreground'/>
 
 </div>
+  </ConfirmModal>
 
 </div>
           </div>

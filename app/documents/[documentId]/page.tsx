@@ -1,9 +1,9 @@
 import React from 'react'
 
-const InnerDocumentsPage = () => {
+const DocumentIdPage = () => {
   return (
-    <div>InnerDocumentsPage</div>
+    <div>DocumentIdPage</div>
   )
 }
 
-export default InnerDocumentsPage
+export default DocumentIdPage

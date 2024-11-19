@@ -4,6 +4,7 @@ import React, { ReactNode } from 'react'
 import { useConvexAuth } from 'convex/react'
 import { TbLoader3 } from 'react-icons/tb'
 import { DocNavigations } from '@/components/navigations/doc-navigations'
+import { SearchCommand } from '@/components/search/search-command'
 
 const DashboardLayout = ({children}:{
     children:ReactNode
@@ -26,6 +27,7 @@ if(isLoading){
 <DocNavigations/>
 
 <main className='flex-1 h-screen overflow-y-auto'>
+  <SearchCommand/>
         {children}
 </main>
         </section>

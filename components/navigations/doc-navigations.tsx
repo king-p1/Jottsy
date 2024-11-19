@@ -1,7 +1,7 @@
 "use client"
 import { cn } from '@/lib/utils'
 import { ChevronLeft, PlusCircle, Search, Settings,FilePlus2, Archive } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { CiMenuFries } from "react-icons/ci";
@@ -17,10 +17,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { ArchivedBox } from './archived-box'
+import { useSearch } from '@/hooks/use-search'
+import { useSettings } from '@/hooks/use-settings'
+import { DocNav } from './doc-nav'
 
 export const DocNavigations = () => {
-  
+  const {onOpen} = useSearch()
+  const {onOpen:settingsOnOpen} = useSettings()
   const pathName = usePathname()
+  const params = useParams()
 
   const isResizingRef = useRef(false)
   const sidebarRef = useRef<ElementRef<"aside">>(null)
@@ -135,14 +140,14 @@ className={cn("h-6 w-6 text-muted-foreground rounded-sm absolute top-3 right-2 o
 
    <div className="">
     <UserItem/>
-    <Item onClick={()=>{}}
+    <Item onClick={onOpen}
   label='Search'
 Icon={Search}
 isSearch
    />
 
     <Item 
-    onClick={()=>{}}
+    onClick={settingsOnOpen}
   label='Settings'
 Icon={Settings}
   />
@@ -184,9 +189,17 @@ onClick={resetWidth}
 
 <div className={cn("absolute top-0 left-60 z-[99999] w-[calc(100%-240px)]",isResetting && 'transition-all ease-in-out duration-300' , isMobile && 'left-0 w-full')} ref={navbarRef}>
 
-<nav className='py-2 px-3 w-full bg-transparent'>
+{!!params.documentId ? (
+  <DocNav
+  isCollapsed={isCollapsed}
+  onResetWidth={resetWidth}
+  />
+):
+
+(<nav className='py-2 px-3 w-full bg-transparent'>
   {isCollapsed && (<CiMenuFries onClick={resetWidth} role='button' className='font-semibold h-6 w-6 text-muted-foreground'/>)}
-</nav>
+</nav>)
+}
 
 </div>
 

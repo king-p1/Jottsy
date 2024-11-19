@@ -21,3 +21,27 @@ export interface DocumentListProps{
     level?:number
     data?:Doc<"documents">[]
 }
+
+export interface DocNavProps{
+    isCollapsed:boolean
+    onResetWidth:()=>void
+
+}
+
+export interface TitleProps{
+    initialData:Doc<"documents">
+
+}
+
+export type SearchStoreType = {
+    isOpen:boolean
+    onOpen:()=>void
+    onClose:()=>void
+    toggle:()=>void
+}
+
+export type SettingsStoreType = {
+    isOpen:boolean
+    onOpen:()=>void
+    onClose:()=>void
+}
