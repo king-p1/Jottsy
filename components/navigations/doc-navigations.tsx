@@ -1,6 +1,6 @@
 "use client"
 import { cn } from '@/lib/utils'
-import { ChevronLeft, PlusCircle, Search, Settings } from 'lucide-react'
+import { ChevronLeft, PlusCircle, Search, Settings,FilePlus2, Archive } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
@@ -11,6 +11,11 @@ import { useMutation,useQuery } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { toast } from 'sonner'
 import { DocumentList } from './document-list'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 export const DocNavigations = () => {
   
@@ -129,15 +134,14 @@ className={cn("h-6 w-6 text-muted-foreground rounded-sm absolute top-3 right-2 o
 
    <div className="">
     <UserItem/>
-    <Item onClick={handleCreate}
+    <Item onClick={()=>{}}
   label='Search'
 Icon={Search}
 isSearch
-oncClick={()=>{}}
-  />
+   />
 
     <Item 
-    onClick={handleCreate}
+    onClick={()=>{}}
   label='Settings'
 Icon={Settings}
   />
@@ -147,8 +151,28 @@ Icon={PlusCircle}
   />
    </div>
 
-<div className="mt-4">
+<div className="mt-4 flex flex-col gap-3">
   <DocumentList/>
+    <Item 
+    onClick={handleCreate}
+  label='Add a document'
+Icon={FilePlus2}
+  />
+  <Popover>
+  <PopoverTrigger className='w-full'>
+  <Item 
+  label='Archived'
+Icon={Archive}
+  />
+  </PopoverTrigger>
+  
+  <PopoverContent 
+  className='p-0 w-72'
+  side={isMobile ? 'bottom' : 'right'}>
+    Place content for the popover here.
+    </PopoverContent>
+</Popover>
+
 </div>
 
 <div className='opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize h-full absolute w-1 bg-primary/10 right-0 top-0'

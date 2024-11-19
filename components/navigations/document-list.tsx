@@ -49,7 +49,7 @@ return (
         expanded && 'last:block', level === 0 && 'hidden'
     )}
     style={{
-        paddingLeft: level ? `${(level * 12) + 25}px` : undefined
+        paddingLeft: level ? `${(level * 12) + 25}px` : '25px'
     }}
     >
         No pages here

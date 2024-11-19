@@ -26,7 +26,9 @@ import {
 export const Item = ({onClick,label,Icon,active,documentIcon,expanded,id,isSearch,level = 0,onExpand}:ItemProps) => {
     const router = useRouter()
     const {user} = useUser()
+
     const create = useMutation(api.documents.create)
+    const archiveDoc = useMutation(api.documents.archiveDocs)
 
     const ChevronIcon = expanded ? ChevronDown : ChevronRight
 
@@ -51,6 +53,19 @@ router.push(`/documents/${documentId}`)
         loading:'Creating a new document...',
         success:'New document created successfully!',
         error:'Failed to create new document.'
+      })
+    }
+    
+    const onArchive = (e:React.MouseEvent<HTMLDivElement,MouseEvent>) =>{
+        e.stopPropagation()
+        if(!id) return 
+      const promise = archiveDoc({
+        id
+      }) 
+    toast.promise(promise,{
+        loading:'Archiving document...',
+        success:'Document moved to archive!',
+        error:'Failed to archive document.'
       })
     }
 
@@ -108,12 +123,12 @@ role="button"
   forceMount
   align="start"
   >
-    <DropdownMenuItem onClick={()=>{}}>
-        <PiTrashSimpleDuotone className="h-4 w-4 mr-2"/>
+    <DropdownMenuItem onClick={onArchive}>
+        <PiTrashSimpleDuotone size={27} className="h-6 w-6 mr-2"/>
         Delete
     </DropdownMenuItem>
     <DropdownMenuSeparator/>
-    <div>
+    <div className="text-muted-foreground text-sm p-2 text-center">
         Last edited by: {user?.fullName} 
     </div>
   </DropdownMenuContent>
