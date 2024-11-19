@@ -2,7 +2,7 @@
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
 import { useQuery,useMutation } from 'convex/react'
-import { Search } from 'lucide-react'
+import { Search, Trash, Undo } from 'lucide-react'
 import { useParams,useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { TbLoader3 } from 'react-icons/tb'
@@ -83,7 +83,29 @@ if(documents === undefined){
           onClick={()=>onClick(id)}
           className='text-base rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between'
           >
-<span>{title}</span>
+<span className='truncate pl-2'>{title}</span>
+
+<div className="flex items-center">
+
+<div
+onClick={(e)=>handleRestore(e,id)}
+role='button'
+className='rounded-sm p-2 hover:bg-neutral-200'
+>
+  <Undo className='h-4 w-4 mr-1 text-muted-foreground'/>
+
+</div>
+
+<div
+onClick={(e)=>handleDelete(id)}
+role='button'
+className='rounded-sm p-2 hover:bg-neutral-200'
+>
+  <Trash className='h-4 w-4 mr-1 text-muted-foreground'/>
+
+</div>
+
+</div>
           </div>
         ))}
       </div>
