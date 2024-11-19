@@ -1,11 +1,16 @@
 "use client"
 import { cn } from '@/lib/utils'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, PlusCircle, Search, Settings } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { CiMenuFries } from "react-icons/ci";
 import { UserItem } from './user-item'
+import { Item } from './item'
+import { useMutation,useQuery } from 'convex/react'
+import { api } from '@/convex/_generated/api'
+import { toast } from 'sonner'
+import { DocumentList } from './document-list'
 
 export const DocNavigations = () => {
   
@@ -97,6 +102,18 @@ const collapseSidebar = () =>{
   }
 }
 
+const create = useMutation(api.documents.create)
+
+const handleCreate = () =>{
+  const promise = create({
+    title:'Untitled'
+  })
+toast.promise(promise,{
+  loading:'Creating a new document...',
+  success:'New document created successfully!',
+  error:'Failed to create document.'
+})
+}
   return (
     <>
     <aside className={cn('group/sidebar h-screen bg-secondary overflow-y-auto relative flex w-60 z-[99999] flex-col', isResetting && 'transition-all ease-in-out duration-300',isMobile&& 'w-0')}
@@ -112,10 +129,26 @@ className={cn("h-6 w-6 text-muted-foreground rounded-sm absolute top-3 right-2 o
 
    <div className="">
     <UserItem/>
+    <Item onClick={handleCreate}
+  label='Search'
+Icon={Search}
+isSearch
+oncClick={()=>{}}
+  />
+
+    <Item 
+    onClick={handleCreate}
+  label='Settings'
+Icon={Settings}
+  />
+    <Item onClick={handleCreate}
+  label='New document'
+Icon={PlusCircle}
+  />
    </div>
 
 <div className="mt-4">
-  <p>Documents</p>
+  <DocumentList/>
 </div>
 
 <div className='opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize h-full absolute w-1 bg-primary/10 right-0 top-0'
