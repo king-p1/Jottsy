@@ -2,28 +2,30 @@
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
 import { useMutation } from 'convex/react'
-import { useParams, useRouter } from 'next/navigation'
+import {  useRouter } from 'next/navigation'
 import React from 'react'
 import { toast } from 'sonner'
 import { Button } from '../ui/button'
 import { ConfirmModal } from '../modal/confirm-modal'
 
+
 export const Banner = ({documentId}:{documentId:Id<"documents">}) => {
 const router = useRouter()
-const params = useParams()
 const remove = useMutation(api.documents.deleteDoc)
 const restore = useMutation(api.documents.restoreDoc)
 
 const onRemove = () => {
     const promise = remove({id:documentId})
+        .then(() => {
+            router.push("/documents");
+            router.refresh();
+        });
     toast.promise(promise,{
         loading:'Deleting document...',
         success:'Document has been deleted!',
         error:'Failed to delete document.'
     })
-    if(params.documentId === documentId) {
-        router.push('/documents')
-      }}
+}
 
 const onRestore = () => {
     const promise = restore({id:documentId})
@@ -42,24 +44,32 @@ const onRestore = () => {
 <Button size='sm' onClick={onRestore}
 variant='outline'
 className='border-white bg-white hover:bg-emerald-500 text-emerald-500
- hover:text-white p-1 px-2 h-auto font-semibold'
+ hover:text-white p-1 px-2 h-auto font-semibold hover:border-2'
 >
     Restore document
 </Button>
+
+ 
+
+
 
 <ConfirmModal
 onConfirm={onRemove}
 >
 
-<Button size='sm' 
+    <Button size='sm' 
 variant='outline'
-className='border-white bg-white hover:bg-red-400
+className='border-white bg-white hover:bg-red-600
+hover:border-2
 hover:text-white
  text-red-500 p-1 px-2 h-auto font-semibold'
 >
     Delete document
 </Button>
-    </ConfirmModal>
+</ConfirmModal>
+ 
+ 
+
     </div>
   )
 }

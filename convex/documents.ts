@@ -58,7 +58,7 @@ export const getById = query({
 
     const documents = await ctx.db.get(args.documentId)
 
-    if(!documents) throw new Error('Document not found')
+    if(!documents) return null
 
       if(documents.isPublished && !documents.isArchived) return documents;
 

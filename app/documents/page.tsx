@@ -7,15 +7,18 @@ import Image from 'next/image'
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { api } from '@/convex/_generated/api'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 const Documents = () => {
 const {user} = useUser()
+const router = useRouter()
 const create = useMutation(api.documents.create)
 
 const handleCreate = () =>{
   const promise = create({
     title:'Untitled'
-  })
+  }).then((documentId)=>router.push(`/documents/${documentId}`))
+
 toast.promise(promise,{
   loading:'Creating a new document...',
   success:'New document created successfully!',

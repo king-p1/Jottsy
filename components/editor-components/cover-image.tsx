@@ -11,6 +11,7 @@ import { useParams } from "next/navigation"
 import { Id } from "@/convex/_generated/dataModel"
 import { toast } from "sonner"
 import { useEdgeStore } from "@/lib/edgestore"
+import { Skeleton } from "../ui/skeleton"
 
 export const CoverImage = ({url,preview}:{url?:string,preview?:boolean}) => {
 
@@ -71,3 +72,9 @@ onClick={handleRemove}
     </div>
   )
 }
+
+CoverImage.Skeleton = function CoverImageSkeleton () {
+    return (
+            <Skeleton className="w-full h-[28vh] p-2"/>
+    )
+    }

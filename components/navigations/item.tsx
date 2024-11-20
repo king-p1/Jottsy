@@ -60,7 +60,8 @@ router.push(`/documents/${documentId}`)
         if(!id) return 
       const promise = archiveDoc({
         id
-      }) 
+      }).then(()=>router.push(`/documents`))
+
     toast.promise(promise,{
         loading:'Archiving document...',
         success:'Document moved to archive!',

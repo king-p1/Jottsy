@@ -81,3 +81,5 @@ const res = await edgestore.publicFiles.upload({
     </Dialog>
   );
 };
+
+

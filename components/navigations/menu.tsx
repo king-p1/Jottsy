@@ -63,7 +63,7 @@ export const Menu = ({ documentId }: { documentId: Id<"documents"> }) => {
 };
 
 
-Menu.Skeleton = function MenuSkeleton ({level}:{level?:number}) {
+Menu.Skeleton = function MenuSkeleton () {
     return (
             <Skeleton className="h-6 w-6 rounded-md "/>
     )

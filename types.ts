@@ -40,6 +40,12 @@ export interface TitleProps{
 
 }
 
+export interface TextEditorProps{
+   editable?:boolean
+   initialContent?:string
+onChange:(value:string)=>void
+}
+
 export type SearchStoreType = {
     isOpen:boolean
     onOpen:()=>void

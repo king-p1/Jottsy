@@ -12,7 +12,7 @@ import Link from "next/link"
 import errorImg from '@/public/second-404.png'
 import React, { useMemo } from 'react'
 
-const DocumentIdPage = ({params:{documentId}}:{
+const Preview = ({params:{documentId}}:{
   params:{
     documentId:Id<"documents">
   }
@@ -76,11 +76,12 @@ alt="Error"
 
   return (
     <section className='pb-40'>
-     <CoverImage url={document.coverImage}/>
+     <CoverImage preview url={document.coverImage}/>
      
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
-        <Toolbar initialData={document}/>
+        <Toolbar preview initialData={document}/>
         <TextEditor
+        editable={false}
         onChange={handleChange}
         initialContent={document.content}
         />
@@ -90,4 +91,4 @@ alt="Error"
   )
 }
 
-export default DocumentIdPage
+export default Preview

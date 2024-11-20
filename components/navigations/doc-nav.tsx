@@ -9,6 +9,7 @@ import { CiMenuFries } from "react-icons/ci";
 import { Title } from './title'
 import { Banner } from './banner'
 import { Menu } from './menu'
+import { PublishDoc } from './publish-doc'
 
 export const DocNav = ({onResetWidth,isCollapsed}:DocNavProps) => {
 const params = useParams()
@@ -49,6 +50,9 @@ if(document === null) return null
 
   <div className="flex items-center gap-x-2">
   <Menu documentId={document._id}/>
+    <PublishDoc
+      initialData={document}
+    />
   </div>
   
 </div>

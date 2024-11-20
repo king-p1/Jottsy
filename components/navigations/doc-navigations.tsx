@@ -1,7 +1,7 @@
 "use client"
 import { cn } from '@/lib/utils'
 import { ChevronLeft, PlusCircle, Search, Settings,FilePlus2, Archive } from 'lucide-react'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { CiMenuFries } from "react-icons/ci";
@@ -30,6 +30,7 @@ export const DocNavigations = () => {
   const isResizingRef = useRef(false)
   const sidebarRef = useRef<ElementRef<"aside">>(null)
   const navbarRef = useRef<ElementRef<"div">>(null)
+  const router = useRouter()
   
   const isMobile = useMediaQuery('(max-width: 768px)')
 const [isResetting, setIsResetting] = useState(false)
@@ -118,7 +119,7 @@ const create = useMutation(api.documents.create)
 const handleCreate = () =>{
   const promise = create({
     title:'Untitled'
-  })
+  }).then((documentId)=>router.push(`/documents/${documentId}`))
 toast.promise(promise,{
   loading:'Creating a new document...',
   success:'New document created successfully!',
