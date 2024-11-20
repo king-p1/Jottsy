@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import { cn } from '@/lib/utils'
 import { ChevronLeft, PlusCircle, Search, Settings,FilePlus2, Archive } from 'lucide-react'

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { api } from "@/convex/_generated/api";
 import { TitleProps } from "@/types";
 import { useMutation } from "convex/react";

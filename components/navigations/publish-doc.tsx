@@ -10,7 +10,7 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
-import { Copy, Globe } from "lucide-react";
+import { Copy } from "lucide-react";
 import { PiGlobeHemisphereWestDuotone } from "react-icons/pi";
 import { Input } from "../ui/input";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
