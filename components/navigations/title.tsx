@@ -41,7 +41,7 @@ const onKeyDown=(e:React.KeyboardEvent<HTMLInputElement>)=>{
 }
 
   return (
-    <div className="flex items-center gap-x-1">
+    <div className="flex items-center gap-x-1 ">
       {!!icon && <p>{icon}</p>}
       {isEditing ? (
         <Input 

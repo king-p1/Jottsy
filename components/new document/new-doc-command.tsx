@@ -17,7 +17,7 @@ import { api } from "@/convex/_generated/api"
 
 import React from 'react'
 
-export const SearchCommand = () => {
+export const NewDocumentCommand = () => {
     const router = useRouter()
     const {user} = useUser()
     const documents = useQuery(api.documents.getSearchedDocs)
@@ -33,7 +33,7 @@ export const SearchCommand = () => {
 
     useEffect(()=>{
         const down = (e: KeyboardEvent) => {
-            if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+            if (e.key === "n" && (e.metaKey || e.ctrlKey)) {
               e.preventDefault()
               toggle()
             }

@@ -7,7 +7,7 @@ import { useMediaQuery } from 'usehooks-ts'
 import { CiMenuFries } from "react-icons/ci";
 import { UserItem } from './user-item'
 import { Item } from './item'
-import { useMutation,useQuery } from 'convex/react'
+import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { toast } from 'sonner'
 import { DocumentList } from './document-list'
