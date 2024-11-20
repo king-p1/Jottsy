@@ -19,7 +19,7 @@ const Home = () => {
       <Navbar/>
 
 
-<div className="flex justify-center flex-col items-center motion-preset-expand motion-duration-1000" >
+<div className="flex justify-center flex-col items-center motion-preset-expand motion-duration-1000 -mt-16" >
 
 <Image
 alt='home'
