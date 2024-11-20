@@ -151,10 +151,12 @@ isSearch
     onClick={settingsOnOpen}
   label='Settings'
 Icon={Settings}
+isSetting
   />
     <Item onClick={handleCreate}
   label='New document'
 Icon={PlusCircle}
+isNewDoc
   />
    </div>
 

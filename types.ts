@@ -13,6 +13,8 @@ export interface ItemProps {
     active?:boolean
     expanded?:boolean
     isSearch?:boolean
+    isNewDoc?:boolean
+    isSetting?:boolean
     level?:number
     onExpand?:()=>void
 }

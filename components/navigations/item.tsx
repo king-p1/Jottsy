@@ -22,7 +22,7 @@ import {
 
 
 
-export const Item = ({onClick,label,Icon,active,documentIcon,expanded,id,isSearch,level = 0,onExpand}:ItemProps) => {
+export const Item = ({onClick,label,Icon,active,documentIcon,expanded,id,isSearch,isSetting,isNewDoc,level = 0,onExpand}:ItemProps) => {
     const router = useRouter()
     const {user} = useUser()
 
@@ -97,12 +97,25 @@ router.push(`/documents/${documentId}`)
        </span>
         
 
-        {isSearch && (<kbd className=" ml-auto pointer-events-none rounded border bg-muted h-7 select-none inline-flex px-1 gap-1 items-center text-muted-foreground font-medium text-[16px]">
+        {isSearch && (<kbd className=" ml-auto pointer-events-none rounded border-2
+        border-neutral-400 bg-muted h-7 select-none inline-flex px-1 gap-1 items-center text-muted-foreground font-semibold text-[16.2px]">
             <span className="text-sm flex items-center justify-center ">
-                Ctrl
-                / 
-                <MdKeyboardCommandKey size={17}/>
+                Ctrl/<MdKeyboardCommandKey size={17}/>
                 </span>K
+        </kbd>)}
+
+        {isNewDoc && (<kbd className=" ml-auto pointer-events-none rounded border-2
+        border-neutral-400 bg-muted h-7 select-none inline-flex px-1 gap-1 items-center text-muted-foreground font-semibold text-[16.3px]">
+            <span className="text-sm flex items-center justify-center ">
+                Ctrl/<MdKeyboardCommandKey size={17}/>
+                </span>I
+        </kbd>)}
+     
+        {isSetting && (<kbd className=" ml-auto pointer-events-none rounded border-2
+        border-neutral-400 bg-muted h-7 select-none inline-flex px-1 gap-1 items-center text-muted-foreground font-semibold text-[16.3px]">
+            <span className="text-sm flex items-center justify-center ">
+                Ctrl/<MdKeyboardCommandKey size={17}/>
+                </span>Q
         </kbd>)}
 
     {!!id && (<div 
