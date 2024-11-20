@@ -19,12 +19,12 @@ const Home = () => {
       <Navbar/>
 
 
-<div className="flex justify-center flex-col items-center motion-preset-expand motion-duration-1000 -mt-16" >
+<div className="flex justify-center flex-col items-center motion-preset-expand motion-duration-1000 -mt-12 mb-2" >
 
 <Image
 alt='home'
-width='500'
-height='500'
+width='400'
+height='400'
 src={homeImg}
 />
 <div className="flex flex-col gap-3 text-center justify-center items-center">
