@@ -2,6 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
 
+
 export const create = mutation({
   args: {
     title: v.string(),
@@ -259,6 +260,7 @@ export const deleteIcon = mutation({
         
      },
 })
+
 export const deleteCoverImg = mutation({
     args: {
         id: v.id("documents")
@@ -292,6 +294,7 @@ export const updateDoc = mutation({
     content: v.optional(v.string()),
     icon: v.optional(v.string()),
     isPublished: v.optional(v.boolean()),
+    canvasData: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -300,16 +303,39 @@ export const updateDoc = mutation({
 
     const userId = identity.subject;
 
-    const {id,...rest} = args
+    const { id, ...rest } = args;
 
-    const existingsDocs = await ctx.db.get(args.id)
-    if (!existingsDocs) throw new Error("Document not found!");
+    const existingDocs = await ctx.db.get(args.id);
+    if (!existingDocs) throw new Error("Document not found!");
 
-    if(existingsDocs.userId !== userId)throw new Error("Not authorized!");
+    if (existingDocs.userId !== userId) throw new Error("Not authorized!");
 
     const document = await ctx.db.patch(id, {
-     ...rest
+      ...rest
     });
+    return document;
+  },
+});
+
+ 
+
+export const getCanvas = query({
+  args: {
+    id: v.id("documents"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    
+    const document = await ctx.db.get(args.id);
+    if (!document) return null;
+
+    if (document.isPublished && !document.isArchived) return document;
+
+    if (!identity) throw new Error("Not authenticated!");
+    
+    const userId = identity.subject;
+    if (document.userId !== userId) throw new Error("Not authorized!");
+
     return document;
   },
 });

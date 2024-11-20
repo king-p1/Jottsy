@@ -22,7 +22,7 @@ import {
 
 
 
-export const Item = ({onClick,label,Icon,active,documentIcon,expanded,id,isSearch,isSetting,isNewDoc,level = 0,onExpand}:ItemProps) => {
+export const Item = ({onClick,label,Icon,active,documentIcon,expanded,id,isSearch,isCanvas,isSetting,isNewDoc,level = 0,onExpand}:ItemProps) => {
     const router = useRouter()
     const {user} = useUser()
 
@@ -147,12 +147,12 @@ role="button"
   </DropdownMenuContent>
 </DropdownMenu>
 
-<div className=" opacity-0 h-full ml-auto group-hover:opacity-100 rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+{!isCanvas && (<div className=" opacity-0 h-full ml-auto group-hover:opacity-100 rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
 role="button"
 onClick={onCreate}
 >
     <Plus className="h-4 w-4 text-muted-foreground"/>
-</div>
+</div>)}
         </div>)}
 
 

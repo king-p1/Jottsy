@@ -15,6 +15,7 @@ export interface ItemProps {
     isSearch?:boolean
     isNewDoc?:boolean
     isSetting?:boolean
+    isCanvas?:boolean
     level?:number
     onExpand?:()=>void
 }

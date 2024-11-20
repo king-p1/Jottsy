@@ -6,15 +6,15 @@ import { useParams,useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Item } from './item'
 import { cn } from '@/lib/utils'
-import { FileIcon } from 'lucide-react'
+import { ClipboardPenLine } from 'lucide-react'
 
 
-export const DocumentList = ({data,level = 0,parentDocument}:DocumentListProps) => {
+export const CanvasList = ({data,level = 0,parentDocument}:DocumentListProps) => {
     const router = useRouter()
     const params = useParams()
     const documents = useQuery(api.documents.getSidebarDocs,{
         parentDocument:parentDocument
-    })?.filter(doc => doc.canvasData === undefined)
+    })?.filter(doc => doc.canvasData !== undefined)
 
 const [expanded, setExpanded] = useState<Record<string,boolean>>({})
 
@@ -26,7 +26,7 @@ const onExpand = (documentId:string) =>{
     )
 }
 const onRedirect = (documentId:string) =>{
-    router.push(`/documents/${documentId}`)
+    router.push(`/documents/canvas/${documentId}`)
 }
 if(documents === undefined){
     return (<>
@@ -52,7 +52,7 @@ return (
         paddingLeft: level ? `${(level * 12) + 25}px` : '25px'
     }}
     >
-        No pages here
+        No boards here
     </p>
 
 {documents.map(({_id:id,title,icon})=>(
@@ -66,12 +66,13 @@ active={params.documentId === id}
 level={level}
 onExpand={()=>onExpand(id)}
 expanded={expanded[id]}
-Icon={FileIcon}
+Icon={ClipboardPenLine}
+isCanvas={true}
 />
 
 {/* recursively calling the component */}
 {expanded[id] && (
-    <DocumentList
+    <CanvasList
     parentDocument={id}
     level={level+1}
     />

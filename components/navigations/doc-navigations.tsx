@@ -20,6 +20,10 @@ import { ArchivedBox } from './archived-box'
 import { useSearch } from '@/hooks/use-search'
 import { useSettings } from '@/hooks/use-settings'
 import { DocNav } from './doc-nav'
+import { LiaChessBoardSolid } from "react-icons/lia";
+import Link from 'next/link'
+import { Button } from '../ui/button'
+import { CanvasList } from './canvas-list'
 
 export const DocNavigations = () => {
   const {onOpen} = useSearch()
@@ -126,6 +130,17 @@ toast.promise(promise,{
   error:'Failed to create document.'
 })
 }
+
+const handleCreateCanvas = () =>{
+  const promise = create({
+    title:'Untitled Canvas'
+  }).then((documentId)=>router.push(`/documents/canvas/${documentId}`))
+toast.promise(promise,{
+  loading:'Creating a new canvas...',
+  success:'New canvas created successfully!',
+  error:'Failed to create canvas.'
+})
+}
   return (
     <>
     <aside className={cn('group/sidebar h-screen bg-secondary overflow-y-auto relative flex w-60 z-[99999] flex-col', isResetting && 'transition-all ease-in-out duration-300',isMobile&& 'w-0')}
@@ -162,11 +177,29 @@ isNewDoc
 
 <div className="mt-4 flex flex-col gap-3">
   <DocumentList/>
-    <Item 
-    onClick={handleCreate}
-  label='Add a document'
+  <CanvasList/>
+
+<div
+className=' text-muted-foreground p-1 text-sm mt-2 h-full hover:bg-neutral-200 w-full  dark:hover:bg-neutral-600'
+onClick={handleCreateCanvas}
+role='button'
+>
+<p className="flex gap-2 items-center ml-3">
+<LiaChessBoardSolid size={21} className='h-5 w-5'/> Open Canvas
+</p>
+
+</div>
+
+<Item 
+onClick={handleCreate}
+label='Add a document'
 Icon={FilePlus2}
-  />
+/>
+
+
+
+
+  
   <Popover>
   <PopoverTrigger className='w-full'>
   <Item 

@@ -8,7 +8,7 @@ import React from 'react'
 
 const Error = () => {
   return (
-    <div className=" h-[88vh] flex flex-col items-center justify-center space-y-4">
+    <div className=" h-[100vh] flex flex-col items-center justify-center space-y-4 dark:bg-[#161616]">
 <Image
 src={errorImg}
 width='430'

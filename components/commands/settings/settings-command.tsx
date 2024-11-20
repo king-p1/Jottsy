@@ -35,7 +35,7 @@ export const SettingsCommand = () => {
     if(!isMounted) return null
 
   return (
-    <CommandDialog open={isOpen} onOpenChange={onClose}>
+    <CommandDialog>
     <CommandInput placeholder={`Your Jottsy settings`} />
     <CommandList>
       <CommandEmpty>No documents found.</CommandEmpty>

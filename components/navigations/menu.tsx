@@ -15,7 +15,7 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
-import { Ellipsis, Trash } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 import { PiTrashSimpleDuotone } from "react-icons/pi";
 import { Skeleton } from "../ui/skeleton";
 
@@ -37,7 +37,7 @@ export const Menu = ({ documentId }: { documentId: Id<"documents"> }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost" className="mt-2">
           <Ellipsis className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>

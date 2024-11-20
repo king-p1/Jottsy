@@ -25,7 +25,7 @@ const  {isAuthenticated,isLoading} = useConvexAuth()
       </SignInButton>)}
       
     {isAuthenticated && !isLoading &&( 
-    <div className="flex gap-3 items-center">
+    <div className="flex gap-3 items-center motion-preset-expand motion-duration-1000">
 
       <SignedIn>
         <UserButton
