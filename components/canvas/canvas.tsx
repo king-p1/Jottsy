@@ -12,9 +12,10 @@ interface CanvasProps {
   canvasData?: any[];
   onChange: (newElements: any[]) => void;
   isArchived?:boolean
+  isNulled?:boolean
 }
 
-export const Canvas = ({ isArchived,documentId, canvasData, onChange }: CanvasProps) => {
+ const Canvas = ({ isArchived,documentId, canvasData,isNulled, onChange }: CanvasProps) => {
   const { resolvedTheme } = useTheme();
   const [elements, setElements] = useState(canvasData || []);
 
@@ -28,12 +29,14 @@ export const Canvas = ({ isArchived,documentId, canvasData, onChange }: CanvasPr
   };
 
   return (
-    <div className={cn(!isArchived && "h-[94%] mt-10", isArchived && "mt-24 h-[87%]","overflow-hidden w-full ")}>
+    <div className={cn(!isArchived && "h-[94%] mt-10", isArchived && "mt-24 h-[87%]","overflow-hidden w-full ",isNulled && "pointer-events-none")}>
       <Excalidraw
         theme={resolvedTheme === "dark" ? "dark" : "light"}
         initialData={{ elements }}
-        onChange={handleChange}
-      />
+        onChange={isNulled ? undefined : handleChange} 
+             />
     </div>
   );
 };
+
+export default Canvas

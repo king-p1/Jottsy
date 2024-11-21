@@ -41,10 +41,10 @@ if(document === undefined) {
       <CoverImage.Skeleton/>
     <div className="mx-auto mt-10 md:max-w-3xl lg:max-w-4xl">
     <div className="pl-8 space-y-4 pt-4">
-      <Skeleton className='h-4 w[50%]'/>
-      <Skeleton className='h-4 w[80%]'/>
-      <Skeleton className='h-4 w[40%]'/>
-      <Skeleton className='h-4 w[60%]'/>
+      <Skeleton className='h-4 w-[50%]'/>
+      <Skeleton className='h-8 w-[80%]'/>
+      <Skeleton className='h-12 w-[40%]'/>
+      <Skeleton className='h-6 w-[60%]'/>
     </div>
     </div>
     </div>
