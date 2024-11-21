@@ -104,7 +104,7 @@ alt="Error"
 
   return (
     <>
-    <main className='pb-40'>
+    <main className='pb-40 h-screen'>
      <CoverImage preview url={document.coverImage}/>
      
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl h-full ">
