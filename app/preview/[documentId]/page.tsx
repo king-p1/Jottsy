@@ -104,7 +104,7 @@ alt="Error"
 
   return (
     <>
-    <main className='pb-40 h-screen'>
+    <main className='pb-40'>
      <CoverImage preview url={document.coverImage}/>
      
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl h-full ">
@@ -116,7 +116,7 @@ alt="Error"
         />
 
       </div>
-<div className="w-full flex items-center justify-center">
+<div className="w-full flex items-center justify-center h-full">
 
       <div className="h-[600px] w-[90%] ">
         {document.canvasData  && (
